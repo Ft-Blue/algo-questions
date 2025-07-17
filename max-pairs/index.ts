@@ -10,7 +10,7 @@ type shoe = {
 };
 
 const maxPairs = (shoes: shoe[]) => {
-  const shoeCount = shoes.reduce((acc, shoe) => {
+  const shoeCountBySize = shoes.reduce((acc, shoe) => {
     if (!acc[shoe.size]) acc[shoe.size] = { L: 0, R: 0 };
 
     acc[shoe.size][shoe.fit] += 1;
@@ -18,9 +18,9 @@ const maxPairs = (shoes: shoe[]) => {
     return acc;
   }, {} as Record<number, { L: number; R: number }>);
 
-  return Object.values(shoeCount).reduce(
-    (pairsCount, shoeGroup) =>
-      pairsCount + Math.min(...Object.values(shoeGroup)),
+  return Object.values(shoeCountBySize).reduce(
+    (pairsCount, shoeCountByFit) =>
+      pairsCount + Math.min(...Object.values(shoeCountByFit)),
     0
   );
 };
